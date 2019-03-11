@@ -1,4 +1,4 @@
-# tavosPy
+# tavosWaterOutage Home Assistant sensor
 Processes water outages from Tavos and provides them inside Home Assistant
 
 ## Installation:
