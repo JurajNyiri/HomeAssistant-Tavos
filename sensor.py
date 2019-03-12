@@ -4,7 +4,7 @@ configuration.yaml
 sensor:
   - platform: tavosWaterOutage
 """
-REQUIREMENTS = ['tavosPy==0.1.2']
+REQUIREMENTS = ['tavosPy==0.1.3']
 
 import logging
 import json
@@ -61,13 +61,11 @@ class TavosWaterOutage(Entity):
         return self._all_outages
 
     def manualUpdate(self):
-        self.tavospy.update()
-        self._state = ""
-
-        tavosData = self.tavospy.getData()
-    
-        for waterOutage in tavosData:
-            for city in self._monitored_conditions:
+        if(self.tavospy.update()):
+            self._state = ""
+            tavosData = self.tavospy.getData()
+            self._all_outages = {}
+            for waterOutage in tavosData:
                 attribute = ""
                 if(waterOutage['date']['start']):
                     attribute = attribute + waterOutage['date']['start'].strftime("%d.%m.%Y %H:%M")
@@ -84,9 +82,13 @@ class TavosWaterOutage(Entity):
                 if(waterOutage['notes'] != ""):
                     value = value + " (" + waterOutage['notes'] + ")"
                 self._all_outages[attribute] = value
-                
-                if((city in waterOutage['city'] or city in waterOutage['street']) and (datetime.now() < waterOutage['date']['start'] or datetime.now() < waterOutage['date']['end'])):
-                    if(self._state != ""):
-                        self._state = self._state + "\r\n" + attribute + ": " + value
-                    else:
-                        self._state = attribute + ": " + value
+
+
+                for city in self._monitored_conditions:
+                    if((city in waterOutage['city'] or city in waterOutage['street']) and (datetime.now() < waterOutage['date']['start'] or datetime.now() < waterOutage['date']['end'])):
+                        if(self._state != ""):
+                            self._state = self._state + "\r\n" + attribute + ": " + value
+                        else:
+                            self._state = attribute + ": " + value
+        else:
+            _LOGGER.warn("Update for tavosWaterOutage failed.")
