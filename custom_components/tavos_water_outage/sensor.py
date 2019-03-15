@@ -6,7 +6,7 @@ sensor:
 """
 REQUIREMENTS = ['tavosPy==0.1.3']
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 
 import logging
 import json
@@ -88,7 +88,11 @@ class TavosWaterOutage(Entity):
 
 
                 for city in self._monitored_conditions:
-                    if((city in waterOutage['city'] or city in waterOutage['street']) and (datetime.now() < waterOutage['date']['start'] or datetime.now() < waterOutage['date']['end'])):
+
+                    isMonitored = (city in waterOutage['city'] or city in waterOutage['street'])
+                    isInFuture = ((waterOutage['date']['start'] != False and datetime.now() < waterOutage['date']['start']) or (waterOutage['date']['end'] != False and datetime.now() < waterOutage['date']['end']))
+
+                    if(isMonitored and isInFuture):
                         if(self._state != ""):
                             self._state = self._state + "\r\n" + attribute + ": " + value
                         else:
