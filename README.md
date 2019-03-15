@@ -1,15 +1,15 @@
-# tavosWaterOutage Home Assistant sensor
+# tavos_water_outage Home Assistant sensor
 Processes water outages from Tavos and provides them inside Home Assistant
 
 ## Installation:
-Copy file custom_components/tavosWaterOutage/sensor.py to custom_components/tavosWaterOutage/sensor.py
+Copy file custom_components/tavos_water_outage/sensor.py to custom_components/tavos_water_outage/sensor.py
 
 ## Usage:
 Add to configuration.yaml:
 
 ```
 sensor:
-  - platform: tavosWaterOutage
+  - platform: tavos_water_outage
     name: [Optional - name]
     monitored_conditions: [Optional, list of cities/streets to monitor]
         - Example1

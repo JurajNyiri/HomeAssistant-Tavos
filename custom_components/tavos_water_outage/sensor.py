@@ -2,11 +2,11 @@
 Support for Tavos Water Outage
 configuration.yaml
 sensor:
-  - platform: tavosWaterOutage
+  - platform: tavos_water_outage
 """
 REQUIREMENTS = ['tavosPy==0.1.3']
 
-__version__ = "0.3"
+__version__ = "0.3.1"
 
 import logging
 import json
