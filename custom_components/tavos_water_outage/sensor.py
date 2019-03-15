@@ -6,7 +6,7 @@ sensor:
 """
 REQUIREMENTS = ['tavosPy==0.1.3']
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 import logging
 import json
@@ -83,7 +83,8 @@ class TavosWaterOutage(Entity):
                     value = value + " - " + waterOutage['typeOfDefect']
                 if(waterOutage['notes'] != ""):
                     value = value + " (" + waterOutage['notes'] + ")"
-                self._all_outages[attribute] = value
+                if(attribute != "" and value != ""):
+                    self._all_outages[attribute] = value
 
 
                 for city in self._monitored_conditions:
