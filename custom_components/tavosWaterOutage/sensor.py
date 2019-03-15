@@ -21,7 +21,7 @@ from homeassistant.const import (CONF_NAME, CONF_MONITORED_CONDITIONS)
 import homeassistant.helpers.config_validation as cv
 from homeassistant.util import Throttle
 
-DEFAULT_NAME = "TAVOS Water Outage Sensor"
+DEFAULT_NAME = "Tavos Water Outage"
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
