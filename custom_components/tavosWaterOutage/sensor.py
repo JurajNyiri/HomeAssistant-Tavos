@@ -6,6 +6,8 @@ sensor:
 """
 REQUIREMENTS = ['tavosPy==0.1.3']
 
+__version__ = "0.2"
+
 import logging
 import json
 import voluptuous as vol
