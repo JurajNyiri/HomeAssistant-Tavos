@@ -4,7 +4,6 @@ configuration.yaml
 sensor:
   - platform: tavos_water_outage
 """
-REQUIREMENTS = ['tavosPy==0.1.3']
 
 __version__ = "0.3.3"
 
