@@ -5,12 +5,14 @@ sensor:
   - platform: tavos_water_outage
 """
 
-__version__ = "0.3.6"
+__version__ = "0.3.7"
 
 import logging
 import json
 import voluptuous as vol
 import re
+
+from tavosPy import TavosPy
 
 from datetime import timedelta,datetime
 
@@ -31,19 +33,17 @@ _LOGGER = logging.getLogger(__name__)
 MIN_TIME_BETWEEN_SCANS = timedelta(seconds=600) #10 minutes
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
-    import tavosPy
     add_devices([TavosWaterOutage(config)])
 
 
 class TavosWaterOutage(Entity):
 
     def __init__(self, config):
-        import tavosPy
         self._state = ""
         self._all_outages = {}
         self._name = config.get(CONF_NAME)
         self._monitored_conditions = config.get(CONF_MONITORED_CONDITIONS)
-        self.tavospy = tavosPy.TavosPy()
+        self.tavospy = TavosPy()
 
     @property
     def name(self):
@@ -68,19 +68,20 @@ class TavosWaterOutage(Entity):
             self._all_outages = {}
             for waterOutage in tavosData:
                 attribute = ""
-                if(waterOutage['date']['start']):
-                    attribute = attribute + waterOutage['date']['start'].strftime("%d.%m.%Y %H:%M")
-                if(waterOutage['date']['end']):
-                    attribute = attribute + " - " + waterOutage['date']['end'].strftime("%d.%m.%Y %H:%M")
+                if('date' in waterOutage):
+                    if('start' in waterOutage['date'] and waterOutage['date']['start']):
+                        attribute = attribute + waterOutage['date']['start'].strftime("%d.%m.%Y %H:%M")
+                    if('end' in waterOutage['date'] and waterOutage['date']['end']):
+                        attribute = attribute + " - " + waterOutage['date']['end'].strftime("%d.%m.%Y %H:%M")
                 
                 value = ""
-                if(waterOutage['city'] != ""):
+                if('city' in waterOutage and waterOutage['city'] != ""):
                     value = value + waterOutage['city']
-                if(waterOutage['street'] != ""):
+                if('street' in waterOutage and waterOutage['street'] != ""):
                     value = value + " (" + waterOutage['street'] + ")"
-                if(waterOutage['typeOfDefect'] != ""):
+                if('typeOfDefect' in waterOutage and waterOutage['typeOfDefect'] != ""):
                     value = value + " - " + waterOutage['typeOfDefect']
-                if(waterOutage['notes'] != ""):
+                if('notes' in waterOutage and waterOutage['notes'] != ""):
                     value = value + " (" + waterOutage['notes'] + ")"
                 if(attribute != "" and value != ""):
                     self._all_outages[attribute] = value
