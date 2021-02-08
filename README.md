@@ -21,6 +21,29 @@ Sensor entities in format of sensor.tavos*water_outage*_city/street_ will be cre
 - State of the entity becomes nonempty if there is upcoming water outage for that monitored city/street
 - Attributes of the entity list all the current outages
 
+### Usage example
+
+**Automation to notify as soon when there is an upcoming outage in monitored city / street and then every day at 5pm:**
+
+```python
+- id: "1551393505029"
+  alias: Send Water Outage Alert
+  trigger:
+    - at: "17:00:00"
+      platform: time
+    - platform: template
+      value_template: "{{ states('sensor.tavos_water_outage_city')|string != '' }}"
+  condition:
+    - condition: template
+      value_template: "{{ states('sensor.tavos_water_outage_city')|string != '' }}"
+  action:
+    - data_template:
+        message:
+          "Water outage alert: {{ states('sensor.tavos_water_outage_city')|string
+          }}"
+      service: notify.facebook
+```
+
 # Disclaimer
 
 Project and/or author is in no way associated with Tavos and provides this code completely free, according to LICENSE file.
