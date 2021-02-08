@@ -20,6 +20,7 @@ Sensor entities in format of sensor.tavos*water_outage*_city/street_ will be cre
 
 - State of the entity becomes nonempty if there is upcoming water outage for that monitored city/street
 - Attributes of the entity list all the current outages
+- If there are no current outages, sensor will be completely empty and that is expected.
 
 ### Usage example
 
