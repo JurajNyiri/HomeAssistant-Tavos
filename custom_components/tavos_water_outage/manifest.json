@@ -1,8 +1,9 @@
 {
-    "domain": "tavos_water_outage",
-    "name": "Tavos Water Outage",
-    "documentation": "https://github.com/JurajNyiri/HomeAssistant-Tavos",
-    "dependencies": [],
-    "codeowners": ["@JurajNyiri"],
-    "requirements": ["tavosPy==0.2"]
-  }
+  "domain": "tavos_water_outage",
+  "name": "Tavos Water Outage",
+  "documentation": "https://github.com/JurajNyiri/HomeAssistant-Tavos",
+  "dependencies": [],
+  "codeowners": ["@JurajNyiri"],
+  "requirements": ["tavosPy==0.3"],
+  "config_flow": true
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Tavos Water Outage",
+  "config": {
+    "step": {
+      "add_monitored": {
+        "data": {
+          "monitored_string": "Monitored condition"
+        },
+        "description": "Add monitored condition.\n\nIf the city or street name includes this string, it will fill the status of the sensor."
+      }
+    },
+    "error": {
+      "unknown": "Unknown error"
+    }
+  }
+}
