@@ -19,8 +19,8 @@ To add multiple monitored cities or streets, add integration multiple times.
 Sensor entities in format of sensor.tavos*water_outage*_city/street_ will be created.
 
 - State of the entity becomes nonempty if there is upcoming water outage for that monitored city/street
-- Attributes of the entity list all the current outages
-- If there are no current outages, sensor will be completely empty and that is expected.
+- Attribute "outages" of the entity list all the current outages
+- Attribute "last_update" of the entity shows the last time the website has been updated and whether there are no current outages.
 
 ### Usage example
 
