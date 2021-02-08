@@ -25,7 +25,7 @@ Sensor entities in format of sensor.tavos*water_outage*_city/street_ will be cre
 
 **Automation to notify as soon when there is an upcoming outage in monitored city / street and then every day at 5pm:**
 
-```python
+```yaml
 - id: "1551393505029"
   alias: Send Water Outage Alert
   trigger:
