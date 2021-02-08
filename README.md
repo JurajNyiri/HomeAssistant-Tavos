@@ -1,34 +1,25 @@
 # tavos_water_outage Home Assistant sensor
+
 Processes water outages from Tavos and provides them inside Home Assistant
 
-## Installation:
-Copy file custom_components/tavos_water_outage/sensor.py to custom_components/tavos_water_outage/sensor.py
+## Installation
 
-## Usage:
-Add to configuration.yaml:
+Copy contents of custom_components/tavos_water_outage/ to custom_components/tavos_water_outage/ in your Home Assistant config folder.
 
-```
-sensor:
-  - platform: tavos_water_outage
-    name: [Optional - name]
-    monitored_conditions: [Optional, list of cities/streets to monitor]
-        - Example1
-        - Example2
-```
+## Installation using HACS
 
-- State of the entity becomes nonempty if there is upcoming water outage for one of your monitored cities or streets.
-- Attributes of the entity list all the outages.
+HACS is a community store for Home Assistant. You can install [HACS](https://github.com/custom-components/hacs) and then install Tavos Water Outage from the HACS store.
 
-## Track Updates
-This custom component can be tracked with the help of [custom-lovelace](https://github.com/ciotlosm/custom-lovelace).
+## Usage
 
-In your configuration.yaml
+Add monitored cities or streats via Integrations (search for Tavos) in Home Assistant UI.
 
-```
-custom_updater:
-  component_urls:
-    - https://raw.githubusercontent.com/JurajNyiri/HomeAssistant-Tavos/master/custom_updater.json
-```
+To add multiple monitored cities or streets, add integration multiple times.
+
+Sensor entities in format of sensor.tavos*water_outage*_city/street_ will be created.
+
+- State of the entity becomes nonempty if there is upcoming water outage for that monitored city/street
+- Attributes of the entity list all the current outages
 
 # Disclaimer
 
