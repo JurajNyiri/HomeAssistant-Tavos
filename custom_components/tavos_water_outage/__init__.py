@@ -26,7 +26,7 @@ async def async_setup(hass: HomeAssistant, config: dict):
             _LOGGER,
             name="Tavos resource status",
             update_method=async_update_data,
-            update_interval=timedelta(seconds=10),
+            update_interval=timedelta(seconds=120),
         )
 
         await hass.data[DOMAIN]["coordinator"].async_refresh()
