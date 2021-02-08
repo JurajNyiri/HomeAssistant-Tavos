@@ -27,6 +27,7 @@ class TavosWaterOutage(Entity):
         self._monitored_string = entry.data.get(MONITORED_STRING).lower()
         self._controller = data["controller"]
         self._coordinator = data["coordinator"]
+        self._lastUpdate = ""
 
         self.manualUpdate()
 
@@ -46,7 +47,9 @@ class TavosWaterOutage(Entity):
         self._state = ""
         tavosData = self._hass.data[DOMAIN]["controller"].getData()
         self._all_outages = {}
-        for waterOutage in tavosData:
+        self._lastUpdate = tavosData["updated"]
+
+        for waterOutage in tavosData["outages"]:
             attribute = ""
             if "date" in waterOutage:
                 if "start" in waterOutage["date"] and waterOutage["date"]["start"]:
@@ -92,4 +95,7 @@ class TavosWaterOutage(Entity):
 
     @property
     def device_state_attributes(self):
-        return self._all_outages
+        attributes = {}
+        attributes["last_update"] = self._lastUpdate
+        attributes["outages"] = self._all_outages
+        return attributes
