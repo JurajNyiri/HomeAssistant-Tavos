@@ -94,7 +94,7 @@ class TavosWaterOutage(Entity):
                     self._state = attribute + ": " + value
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         attributes = {}
         attributes["last_update"] = self._lastUpdate
         attributes["outages"] = self._all_outages
