@@ -4,7 +4,7 @@
   "documentation": "https://github.com/JurajNyiri/HomeAssistant-Tavos",
   "dependencies": [],
   "codeowners": ["@JurajNyiri"],
-  "requirements": ["tavosPy==0.4"],
+  "requirements": ["tavosPy==0.5"],
   "config_flow": true,
   "version": "1.1.1"
 }
